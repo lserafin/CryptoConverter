@@ -1,15 +1,7 @@
 <h1>
   {{title}}
 </h1>
-{{diagnostic}}
 <select id="baseCoinSelector" class="form-control" required [(ngModel)]="selectedBaseCoin" (ngModelChange)="update()">
-  <option *ngFor="let coin of coins" [value]="coin.code">{{coin.name}} {{coin.code}}</option>
+  <option *ngFor="let coin of coins" [value]="coin.code">{{coin.name}} ({{coin.code}})</option>
 </select>
-{{selectedBaseCoin}} Price: 
-<table>
-    <tr *ngFor="let coin of coins">
-      <td>{{ coin.name }}</td>
-      <td>{{ coin.code }}</td>
-      <td>{{ coin.statuses }}</td>
-    </tr>
-</table>
+{{selectedBaseCoin}} Price: {{ ticker.price }} {{ ticker.target }}

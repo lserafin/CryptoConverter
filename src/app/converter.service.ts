@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 import { Coin } from "app/model/coin";
+import { Ticker } from "app/model/ticker";
 
 @Injectable()
 export class ConverterService {
@@ -16,13 +17,13 @@ export class ConverterService {
                .then(response => response.json().rows as Coin[])
                .catch(this.handleError);
   }
-  /*
-  convert(base: string, target: string): Promise<object> {
+  
+  convert(base: string, target: string): Promise<Ticker> {
     return this.http.get(`${this.tickerUrl}${base.toUpperCase()}-${target.toUpperCase()}`)
                .toPromise()
-               .then(response => response.json())
+               .then(response => response.json().ticker as Ticker)
                .catch(this.handleError);
-  }*/
+  }
 
   private handleError(error: any): Promise<any> {
     console.error('An error occurred', error); // for demo purposes only

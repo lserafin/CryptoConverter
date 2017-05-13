@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { ConverterService } from "app/converter.service";
 import { Coin } from "app/model/coin";
+import { Ticker } from "app/model/ticker";
 
 @Component({
   selector: 'app-root',
@@ -9,10 +10,11 @@ import { Coin } from "app/model/coin";
   providers: [ConverterService]
 })
 export class AppComponent {
-  title = 'List of Coins';
+  title = 'Crypto Convertor';
   coins: Coin[];
   selectedCoin: Coin;
   selectedBaseCoin: string;
+  ticker: Ticker;
 
   constructor(private coinService: ConverterService) { }
 
@@ -20,16 +22,16 @@ export class AppComponent {
     this.coinService.getAllCoins().then(coins => this.coins = coins);
   }
 
+  convert(base: string,target: string): void {
+    this.coinService.convert(base,target).then(ticker => this.ticker = ticker);
+  }
+
   ngOnInit(): void {
     this.getAllCoins();
   }
 
-  onSelect(coin: Coin): void {
-    this.selectedCoin = coin;
-    console.log(this.selectedCoin);
-  }
-
   update(): void {
     console.log(this.selectedBaseCoin);
+    this.convert(this.selectedBaseCoin,"USD");
   }
 }
