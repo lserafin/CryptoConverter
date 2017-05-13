@@ -4,4 +4,10 @@
 <select id="baseCoinSelector" class="form-control" required [(ngModel)]="selectedBaseCoin" (ngModelChange)="update()">
   <option *ngFor="let coin of coins" [value]="coin.code">{{coin.name}} ({{coin.code}})</option>
 </select>
-{{selectedBaseCoin}} Price: {{ ticker.price }} {{ ticker.target }}
+<span>to</span>
+<select id="targetCoinSelector" class="form-control" required [(ngModel)]="selectedTargetCoin" (ngModelChange)="update()">
+  <option *ngFor="let coin of coins" [value]="coin.code">{{coin.name}} ({{coin.code}})</option>
+</select>
+<div *ngIf="selectedBaseCoin && selectedTargetCoin">
+1 {{selectedBaseCoin}}  -> {{ ticker.price }} {{ ticker.target }}
+</div>

@@ -14,6 +14,7 @@ export class AppComponent {
   coins: Coin[];
   selectedCoin: Coin;
   selectedBaseCoin: string;
+  selectedTargetCoin: string;
   ticker: Ticker;
 
   constructor(private coinService: ConverterService) { }
@@ -31,7 +32,10 @@ export class AppComponent {
   }
 
   update(): void {
-    console.log(this.selectedBaseCoin);
-    this.convert(this.selectedBaseCoin,"USD");
+    if(this.selectedTargetCoin && this.selectedBaseCoin) {
+      console.log(this.selectedBaseCoin + "->" + this.selectedTargetCoin);
+      this.convert(this.selectedBaseCoin,this.selectedTargetCoin);
+    }
+    
   }
 }
