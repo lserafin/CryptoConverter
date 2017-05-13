@@ -1,36 +1,23 @@
-<md-sidenav-container class="example-container">
-  <md-toolbar color="primary">
-    {{title}}
-    <span class="app-toolbar-filler"></span>
-  </md-toolbar>
+<md-toolbar color="primary">
+  <span>{{title}}</span>
 
-<md-grid-list cols="2" rowHeight="2:1">
-  <md-grid-tile>
-     <md-card>
-      
-      <md-select id="baseCoinSelector" class="form-control" required [(ngModel)]="selectedBaseCoin" (ngModelChange)="update()">
-  <md-option *ngFor="let coin of coins" [value]="coin.code">{{coin.name}} ({{coin.code}})</md-option>
-</md-select>
-<span>to</span>
-<md-select id="targetCoinSelector" class="form-control" required [(ngModel)]="selectedTargetCoin" (ngModelChange)="update()">
-  <md-option *ngFor="let coin of coins" [value]="coin.code">{{coin.name}} ({{coin.code}})</md-option>
-</md-select>
-    </md-card>
-  </md-grid-tile>
-  <md-grid-tile>
-    <md-card *ngIf="selectedBaseCoin && selectedTargetCoin">
-      1 {{selectedBaseCoin}}  -> {{ ticker.price }} {{ ticker.target }}
-    </md-card>
-  </md-grid-tile>
-</md-grid-list>
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
 
+  <span>GitHub</span>
+</md-toolbar>
 
-  <div class="app-content">
+<md-card>
 
-   
+  <md-select id="baseCoinSelector" class="form-control" required [(ngModel)]="selectedBaseCoin" (ngModelChange)="update()">
+    <md-option *ngFor="let coin of coins" [value]="coin.code">{{coin.name}} ({{coin.code}})</md-option>
+  </md-select>
+  <span>to</span>
+  <md-select id="targetCoinSelector" class="form-control" required [(ngModel)]="selectedTargetCoin" (ngModelChange)="update()">
+    <md-option *ngFor="let coin of coins" [value]="coin.code">{{coin.name}} ({{coin.code}})</md-option>
+  </md-select>
+</md-card>
 
-    
-  </div>
-</md-sidenav-container>
-
-
+<md-card *ngIf="selectedBaseCoin && selectedTargetCoin">
+  1 {{selectedBaseCoin}} -> {{ ticker.price }} {{ ticker.target }}
+</md-card>
