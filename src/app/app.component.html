@@ -5,6 +5,9 @@
 
 <md-card>
   <div class="center">
+    <md-input-container>
+  <input mdInput placeholder="Amount" value="1" type="number" [(ngModel)]="amount">
+</md-input-container>
   <md-input-container>
   <input mdInput placeholder="Base" [mdAutocomplete]="autobase" [(ngModel)]="selectedBaseCoin" [formControl]="coinBaseCtrl">
 </md-input-container>
@@ -23,12 +26,17 @@
 
 <md-autocomplete #autotarget="mdAutocomplete">
   <md-option *ngFor="let coin of filteredTargetCoins | async" [value]="coin.code" (click)="updateTarget()">
-    {{ coin.name }}
+   {{ coin.name }}
   </md-option>
 </md-autocomplete>
   </div>
 
 </md-card>
+
 <md-card *ngIf="selectedBaseCoin && selectedTargetCoin && ticker && ticker.price">
-  1 {{selectedBaseCoin}} -> {{ ticker.price }} {{ ticker.target }}
+    <div class="center">
+      {{amount}} <img src="/assets/icons/SVG/{{selectedBaseCoin}}.svg" class="cryptoicon"> ({{selectedBaseCoin}}) 
+      <i class="material-icons">compare_arrows</i>
+      {{ amount * ticker.price }} <img src="/assets/icons/SVG/{{ ticker.target }}.svg" class="cryptoicon"> ({{ ticker.target }})
+    </div>
 </md-card>

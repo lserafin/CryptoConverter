@@ -25,6 +25,7 @@ export class AppComponent {
   filteredBaseCoins: any;
   filteredTargetCoins: any;
   selectedItem: any;
+  amount: number;
 
   constructor(private coinService: ConverterService) { 
     this.coinBaseCtrl = new FormControl();
