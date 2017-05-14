@@ -4,16 +4,29 @@
 </md-toolbar>
 
 <md-card>
+  <md-input-container>
+  <input mdInput placeholder="Base" [mdAutocomplete]="autobase" [(ngModel)]="selectedBaseCoin" [formControl]="coinBaseCtrl">
+</md-input-container>
 
-  <md-select id="baseCoinSelector" class="form-control" required [(ngModel)]="selectedBaseCoin" (ngModelChange)="update()">
-    <md-option *ngFor="let coin of coins" [value]="coin.code">{{coin.name}} ({{coin.code}})</md-option>
-  </md-select>
-  <span>to</span>
-  <md-select id="targetCoinSelector" class="form-control" required [(ngModel)]="selectedTargetCoin" (ngModelChange)="update()">
-    <md-option *ngFor="let coin of coins" [value]="coin.code">{{coin.name}} ({{coin.code}})</md-option>
-  </md-select>
+<md-autocomplete #autobase="mdAutocomplete">
+  <md-option *ngFor="let coin of filteredBaseCoins | async" [value]="coin.code" (click)="update()">
+    {{ coin.name }}
+  </md-option>
+</md-autocomplete>
+
+<i class="material-icons">compare_arrows</i>
+
+<md-input-container>
+  <input mdInput placeholder="Target" [mdAutocomplete]="autotarget" [(ngModel)]="selectedTargetCoin" [formControl]="coinTargetCtrl">
+</md-input-container>
+
+<md-autocomplete #autotarget="mdAutocomplete">
+  <md-option *ngFor="let coin of filteredTargetCoins | async" [value]="coin.code" (click)="updateTarget()">
+    {{ coin.name }}
+  </md-option>
+</md-autocomplete>
+
 </md-card>
-
-<md-card *ngIf="selectedBaseCoin && selectedTargetCoin">
+<md-card *ngIf="selectedBaseCoin && selectedTargetCoin && ticker && ticker.price">
   1 {{selectedBaseCoin}} -> {{ ticker.price }} {{ ticker.target }}
 </md-card>

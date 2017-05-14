@@ -1,11 +1,11 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { AppComponent } from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-import { MdButtonModule, MdCheckboxModule, MdSelectModule, MdSidenavModule, MdToolbarModule, MdCardModule } from '@angular/material';
+import { MdButtonModule, MdCheckboxModule, MdSelectModule, MdSidenavModule, MdToolbarModule, MdCardModule, MdAutocompleteModule, MdInputModule } from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,10 @@ import { MdButtonModule, MdCheckboxModule, MdSelectModule, MdSidenavModule, MdTo
     MdSelectModule,
     MdSidenavModule,
     MdToolbarModule,
-    MdCardModule
+    MdCardModule,
+    MdAutocompleteModule,
+    MdInputModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

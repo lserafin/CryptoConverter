@@ -2,6 +2,10 @@ import { Component } from '@angular/core';
 import { ConverterService } from "app/converter.service";
 import { Coin } from "app/model/coin";
 import { Ticker } from "app/model/ticker";
+import { FormControl,ReactiveFormsModule } from '@angular/forms';
+import 'rxjs/add/operator/startWith';
+import 'rxjs/add/operator/map';
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'app-root',
@@ -16,8 +20,29 @@ export class AppComponent {
   selectedBaseCoin: string;
   selectedTargetCoin: string;
   ticker: Ticker;
+  coinBaseCtrl: FormControl;
+  coinTargetCtrl: FormControl;
+  filteredBaseCoins: any;
+  filteredTargetCoins: any;
+  selectedItem: any;
 
-  constructor(private coinService: ConverterService) { }
+  constructor(private coinService: ConverterService) { 
+    this.coinBaseCtrl = new FormControl();
+    this.coinTargetCtrl = new FormControl();
+    
+    this.filteredBaseCoins = this.coinBaseCtrl.valueChanges
+        .startWith(null)
+        .map(name => this.filterCoins(name));
+
+    this.filteredTargetCoins = this.coinTargetCtrl.valueChanges
+        .startWith(null)
+        .map(name => this.filterCoins(name));
+  } 
+
+  filterCoins(val: string) {
+    return val ? this.coins.filter(s => new RegExp(`^${val}`, 'gi').test(s.name))
+               : this.coins;
+  }
 
   getAllCoins(): void {
     this.coinService.getAllCoins().then(coins => this.coins = coins);
@@ -32,6 +57,14 @@ export class AppComponent {
   }
 
   update(): void {
+    if(this.selectedTargetCoin && this.selectedBaseCoin) {
+      console.log(this.selectedBaseCoin + "->" + this.selectedTargetCoin);
+      this.convert(this.selectedBaseCoin,this.selectedTargetCoin);
+    }
+    
+  }
+
+  updateTarget(): void {
     if(this.selectedTargetCoin && this.selectedBaseCoin) {
       console.log(this.selectedBaseCoin + "->" + this.selectedTargetCoin);
       this.convert(this.selectedBaseCoin,this.selectedTargetCoin);
