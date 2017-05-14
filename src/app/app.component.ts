@@ -14,7 +14,7 @@ import { Observable } from "rxjs/Observable";
   providers: [ConverterService]
 })
 export class AppComponent {
-  title = 'Crypto Convertor';
+  title = 'Crypto Converter';
   coins: Coin[];
   selectedCoin: Coin;
   selectedBaseCoin: string;
@@ -30,6 +30,7 @@ export class AppComponent {
   constructor(private coinService: ConverterService) { 
     this.coinBaseCtrl = new FormControl();
     this.coinTargetCtrl = new FormControl();
+    this.amount = 1;
     
     this.filteredBaseCoins = this.coinBaseCtrl.valueChanges
         .startWith(null)
