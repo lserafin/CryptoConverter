@@ -4,6 +4,7 @@
 </md-toolbar>
 
 <md-card>
+  <div class="center">
   <md-input-container>
   <input mdInput placeholder="Base" [mdAutocomplete]="autobase" [(ngModel)]="selectedBaseCoin" [formControl]="coinBaseCtrl">
 </md-input-container>
@@ -25,6 +26,7 @@
     {{ coin.name }}
   </md-option>
 </md-autocomplete>
+  </div>
 
 </md-card>
 <md-card *ngIf="selectedBaseCoin && selectedTargetCoin && ticker && ticker.price">
