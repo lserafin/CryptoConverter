@@ -1,10 +1,15 @@
 .mat-card {
     margin: 50px;
 }
+.result {
+    font-size: 25px;
+    padding-left: 20px;
+}
 .center {
-    padding-left: 30%;
+    padding: 20px;
 }
 .cryptoicon {
     height: 20px;
     width: 20px;
+    margin-top: 27px;
 }

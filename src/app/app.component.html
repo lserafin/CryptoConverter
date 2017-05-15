@@ -3,7 +3,6 @@
   <span>{{title}}</span>
 </md-toolbar>
 
-<md-card>
   <div class="center">
     <md-input-container>
   <input mdInput placeholder="Amount" value="1" type="number" [(ngModel)]="amount">
@@ -31,12 +30,8 @@
 </md-autocomplete>
   </div>
 
-</md-card>
-
-<md-card *ngIf="selectedBaseCoin && selectedTargetCoin && ticker && ticker.price">
-    <div class="center">
-      {{amount}} <img src="/assets/icons/SVG/{{selectedBaseCoin}}.svg" class="cryptoicon"> ({{selectedBaseCoin}}) 
+    <div class="result" *ngIf="selectedBaseCoin && selectedTargetCoin && ticker && ticker.price">
+      <span>{{amount}} <img src="/assets/icons/SVG/{{selectedBaseCoin}}.svg" class="cryptoicon"> ({{selectedBaseCoin}}) </span>
       <i class="material-icons">compare_arrows</i>
-      {{ amount * ticker.price }} <img src="/assets/icons/SVG/{{ ticker.target }}.svg" class="cryptoicon"> ({{ ticker.target }})
+      <span>{{ amount * ticker.price }} <img src="/assets/icons/SVG/{{ ticker.target }}.svg" class="cryptoicon"> ({{ ticker.target }})</span>
     </div>
-</md-card>
